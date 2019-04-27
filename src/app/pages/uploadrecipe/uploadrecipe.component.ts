@@ -48,12 +48,10 @@ export class UploadrecipeComponent implements OnInit {
     this.workingRecipe.author = newAuthor;
   }
 
-  // FIXME array does not seem to exist?
   addIngredient(ingredient: string) {
     this.workingRecipe.ingredients.push(ingredient);
   }
 
-  // FIXME array does not seem to exist?
   addStep(instructions: string) {
     this.workingRecipe.directions.push(instructions);
   }
@@ -67,7 +65,7 @@ export class UploadrecipeComponent implements OnInit {
   }
 
   submit() {
-    console.log('submitting recipe');
+    console.log('submitting ' + this.workingRecipe.title);
     // TODO upload to firestore
   }
 }
