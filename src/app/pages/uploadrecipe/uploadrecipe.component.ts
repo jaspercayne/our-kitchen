@@ -32,6 +32,8 @@ export class UploadrecipeComponent implements OnInit {
     });
 
     this.workingRecipe = new Recipe();
+    this.workingRecipe.ingredients = new Array();
+    this.workingRecipe.directions = new Array();
   }
 
   setTitle(newTitle: string) {
@@ -55,6 +57,15 @@ export class UploadrecipeComponent implements OnInit {
   addStep(instructions: string) {
     this.workingRecipe.directions.push(instructions);
   }
+
+  deleteIngredient(ingredient: string) {
+    this.workingRecipe.ingredients[this.workingRecipe.ingredients.indexOf(ingredient)] = null;
+  }
+
+  deleteStep(step: string) {
+    this.workingRecipe.directions[this.workingRecipe.directions.indexOf(step)] = null;
+  }
+
   submit() {
     console.log('submitting recipe');
     // TODO upload to firestore

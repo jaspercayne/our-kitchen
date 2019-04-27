@@ -34,6 +34,12 @@
         <input matInput placeholder="Ingredients" formControlName="ingCtrl" required>
       </mat-form-field>
       <button mat-button (click)=addIngredient(ingredientsFormGroup.controls.ingCtrl.value)>Add another</button>
+      <div *ngFor="let ing of workingRecipe.ingredients">
+        <span *ngIf="ing">
+            {{ing}}
+            <button (click)="deleteIngredient(ing)">X</button>
+        </span>
+      </div>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
@@ -49,6 +55,12 @@
         <input matInput placeholder="Directions" formControlName="stepCtrl" required>
       </mat-form-field>
       <button mat-button (click)=addStep(directionsFormGroup.controls.stepCtrl.value)>Add another</button>
+      <div *ngFor="let step of workingRecipe.directions">
+          <span *ngIf="step">
+              {{step}}
+              <button (click)="deleteStep(step)">X</button>
+          </span>
+        </div>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
