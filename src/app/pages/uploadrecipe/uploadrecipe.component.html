@@ -1,0 +1,69 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <!-- Title -->
+  <mat-step [stepControl]="titleFormGroup">
+    <form [formGroup]="titleFormGroup">
+      <ng-template matStepLabel>Fill out recipe name</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Recipe Title" formControlName="titleCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext (click)="setTitle(titleFormGroup.controls.titleCtrl.value)">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Category -->
+  <mat-step [stepControl]="categoryFormGroup">
+    <form [formGroup]="categoryFormGroup">
+      <ng-template matStepLabel>Set category</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Category" formControlName="categoryCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext (click)="setCategory(categoryFormGroup.controls.categoryCtrl.value)">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Ingredients -->
+  <mat-step [stepControl]="ingredientsFormGroup">
+    <form [formGroup]="ingredientsFormGroup">
+      <ng-template matStepLabel>Add ingredients</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Ingredients" formControlName="ingCtrl" required>
+      </mat-form-field>
+      <button mat-button (click)=addIngredient(ingredientsFormGroup.controls.ingCtrl.value)>Add another</button>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Directions -->
+  <mat-step [stepControl]="directionsFormGroup">
+    <form [formGroup]="directionsFormGroup">
+      <ng-template matStepLabel>Add directions</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Directions" formControlName="stepCtrl" required>
+      </mat-form-field>
+      <button mat-button (click)=addStep(directionsFormGroup.controls.stepCtrl.value)>Add another</button>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Finish -->
+  <mat-step>
+      <ng-template matStepLabel>Preview</ng-template>
+    <app-recipecard [recipe]="workingRecipe"></app-recipecard>
+    <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="submit()">Submit</button>
+      </div>
+  </mat-step>
+</mat-horizontal-stepper>
