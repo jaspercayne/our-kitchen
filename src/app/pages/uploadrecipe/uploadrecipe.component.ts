@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Recipe } from 'src/app/shared/recipe.model';
+import { RecipesService } from 'src/app/shared/recipes.service';
+
+
 
 @Component({
   selector: 'app-uploadrecipe',
@@ -15,7 +18,8 @@ export class UploadrecipeComponent implements OnInit {
   categoryFormGroup: FormGroup;
   workingRecipe: Recipe;
 
-  constructor(private formBuilder: FormBuilder) { }
+
+  constructor(private formBuilder: FormBuilder, private recipeService: RecipesService) { }
 
   ngOnInit() {
     this.titleFormGroup = this.formBuilder.group({
@@ -65,7 +69,6 @@ export class UploadrecipeComponent implements OnInit {
   }
 
   submit() {
-    console.log('submitting ' + this.workingRecipe.title);
-    // TODO upload to firestore
+    this.recipeService.createRecipe(this.workingRecipe);
   }
 }
