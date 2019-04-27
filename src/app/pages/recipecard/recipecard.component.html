@@ -1,22 +1,22 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      {{title}}
+      {{recipe.title}}
     </mat-card-title>
     <mat-card-subtitle>
-      {{category}}
+      {{recipe.category}}
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <ul>
-      <div *ngFor="let ingredient of ingredients">
+      <div *ngFor="let ingredient of recipe.ingredients">
         <li>{{ingredient}}</li>
       </div>
     </ul>
     <br>
 
     <ol>
-      <div *ngFor="let step of directions">
+      <div *ngFor="let step of recipe.directions">
         <li> {{step}} </li>
       </div>
     </ol>
@@ -27,6 +27,6 @@
     <button mat-button>SHARE</button>
   </mat-card-actions>
   <mat-card-footer>
-    This recipe was posted on Our Kitchen by {{author}}
+    This recipe was posted on Our Kitchen by {{recipe.author}}
   </mat-card-footer>
 </mat-card>
