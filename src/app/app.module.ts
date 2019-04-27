@@ -12,6 +12,12 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { UploadrecipeComponent } from './pages/uploadrecipe/uploadrecipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { Firebase } from 'src/firebase';
+import { RecipesService } from './shared/recipes.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,9 +32,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(Firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
   ],
-  providers: [],
+  providers: [RecipesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
