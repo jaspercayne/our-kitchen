@@ -1,34 +1,77 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Recipe } from 'src/app/shared/recipe.model';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+interface RecipeObject extends Recipe {
+  id: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class RecipesService {
+export class RecipesService implements OnInit {
+  recipeCollection: AngularFirestoreCollection<Recipe>;
+  recipes: any;
 
-  constructor() { }
+  constructor(private afs: AngularFirestore) { }
+
+  ngOnInit(): void {
+    this.recipeCollection = this.afs.collection('recipes');
+    this.recipes = this.recipeCollection.snapshotChanges()
+      .map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as RecipeObject;
+          const id = a.payload.doc.id;
+          return { id, data };
+        });
+      });
+  }
 
   /**
    * createRecipe
    */
-  public createRecipe() {
-    console.log('recipe create called');
-    // TODO fill in create function
+  public createRecipe(workingRecipe: Recipe) {
+    this.afs.collection('recipes').add({
+      title: workingRecipe.title,
+      author: workingRecipe.author,
+      category: workingRecipe.category,
+      ingredients: workingRecipe.ingredients,
+      directions: workingRecipe.directions
+    });
   }
 
   /**
    * getRecipe
    */
   public getRecipe(recipeId) {
-    console.log(recipeId);
-    // TODO fill in get function
+    this.recipes.doc(recipeId).get()
+      .then(doc => {
+        if (!doc.exists) {
+          console.log('No such document!');
+        } else {
+          console.log('Document data:', doc.data());
+        }
+      })
+      .catch(err => {
+        console.log('Error getting document', err);
+      });
   }
 
   /**
    * getRecipes
    */
   public getRecipes() {
-    console.log('all recipes');
-    // TODO fill in get all function
+    this.recipes.collection('recipes').get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          console.log(doc.id, '=>', doc.data());
+        });
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
+      });
   }
 
   /**
@@ -42,8 +85,11 @@ export class RecipesService {
   /**
    * deleteRecipe
    */
-  public deleteRecipe(recipeId) {
-    console.log(recipeId + ' deleted');
-    // TODO fill in delete function
+  public deleteRecipe(recipeId: string) {
+    this.recipeCollection.doc(recipeId).delete().then(() => {
+      console.log('Document successfully deleted!');
+    }).catch((error) => {
+      console.error('Error removing document: ', error);
+    });
   }
 }
