@@ -3,6 +3,7 @@ import { Recipe } from 'src/app/shared/recipe.model';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { AuthService } from './auth.service';
 
 interface RecipeObject extends Recipe {
   id: string;
@@ -15,7 +16,7 @@ export class RecipesService implements OnInit {
   recipeCollection: AngularFirestoreCollection<Recipe>;
   recipes: any;
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.recipeCollection = this.afs.collection('recipes');
@@ -35,7 +36,7 @@ export class RecipesService implements OnInit {
   public createRecipe(workingRecipe: Recipe) {
     this.afs.collection('recipes').add({
       title: workingRecipe.title,
-      author: workingRecipe.author,
+      author: this.auth.afAuth.auth.currentUser.displayName,
       category: workingRecipe.category,
       ingredients: workingRecipe.ingredients,
       directions: workingRecipe.directions

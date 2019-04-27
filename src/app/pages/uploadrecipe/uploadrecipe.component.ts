@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Recipe } from 'src/app/shared/recipe.model';
 import { RecipesService } from 'src/app/shared/recipes.service';
+import { AuthService } from 'src/app/shared/auth.service';
 
 
 
@@ -19,7 +20,7 @@ export class UploadrecipeComponent implements OnInit {
   workingRecipe: Recipe;
 
 
-  constructor(private formBuilder: FormBuilder, private recipeService: RecipesService) { }
+  constructor(private formBuilder: FormBuilder, private recipeService: RecipesService, private auth: AuthService) { }
 
   ngOnInit() {
     this.titleFormGroup = this.formBuilder.group({
