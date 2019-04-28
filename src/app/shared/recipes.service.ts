@@ -3,7 +3,7 @@ import { Recipe } from 'src/app/shared/recipe.model';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth/auth.service';
 
 interface RecipeObject extends Recipe {
   id: string;

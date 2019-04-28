@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Recipe } from 'src/app/shared/recipe.model';
 import { RecipesService } from 'src/app/shared/recipes.service';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 
