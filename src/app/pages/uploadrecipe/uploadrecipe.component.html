@@ -21,7 +21,8 @@
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="setCategory(categoryFormGroup.controls.categoryCtrl.value)">Next</button>
+        <button mat-button matStepperNext
+          (click)="setCategory(categoryFormGroup.controls.categoryCtrl.value)">Next</button>
       </div>
     </form>
   </mat-step>
@@ -33,11 +34,11 @@
       <mat-form-field>
         <input matInput placeholder="Ingredients" formControlName="ingCtrl" required>
       </mat-form-field>
-      <button mat-button (click)=addIngredient(ingredientsFormGroup.controls.ingCtrl.value)>Add another</button>
+      <button mat-button (click)=addIngredient(ingredientsFormGroup.controls.ingCtrl.value)>Add ingredient</button>
       <div *ngFor="let ing of workingRecipe.ingredients">
         <span *ngIf="ing">
-            {{ing}}
-            <button (click)="deleteIngredient(ing)">X</button>
+          {{ing}}
+          <button (click)="deleteIngredient(ing)"><i class="material-icons"> delete_forever </i></button>
         </span>
       </div>
       <div>
@@ -54,13 +55,13 @@
       <mat-form-field>
         <input matInput placeholder="Directions" formControlName="stepCtrl" required>
       </mat-form-field>
-      <button mat-button (click)=addStep(directionsFormGroup.controls.stepCtrl.value)>Add another</button>
+      <button mat-button (click)=addStep(directionsFormGroup.controls.stepCtrl.value)>Add step</button>
       <div *ngFor="let step of workingRecipe.directions">
-          <span *ngIf="step">
-              {{step}}
-              <button (click)="deleteStep(step)">X</button>
-          </span>
-        </div>
+        <span *ngIf="step">
+          {{step}}
+          <button (click)="deleteStep(step)"><i class="material-icons"> delete_forever </i></button>
+        </span>
+      </div>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext (click)="setAuthor(auth.afAuth.auth.currentUser.displayName)">Next</button>
@@ -70,12 +71,12 @@
 
   <!-- Finish -->
   <mat-step>
-      <ng-template matStepLabel>Preview</ng-template>
+    <ng-template matStepLabel>Preview</ng-template>
     <app-recipecard [recipe]="workingRecipe"></app-recipecard>
     <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      <button mat-button (click)="submit()">Submit</button>
-      </div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="submit()" (click)="stepper.reset()">Submit</button>
+    </div>
   </mat-step>
 </mat-horizontal-stepper>
