@@ -25,6 +25,7 @@ import { SearchModule } from './search/search.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { BrowseRecipesComponent } from './pages/browse-recipes/browse-recipes.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     UploadrecipeComponent,
     HeaderComponent,
     FooterComponent,
-    SidenavListComponent
+    SidenavListComponent,
+    BrowseRecipesComponent
   ],
   imports: [
     BrowserModule,
