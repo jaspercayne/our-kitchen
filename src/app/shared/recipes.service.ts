@@ -64,23 +64,20 @@ export class RecipesService implements OnInit {
    * getRecipes
    */
   public getRecipes() {
-    this.recipes.collection('recipes').get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          console.log(doc.id, '=>', doc.data());
-        });
-      })
-      .catch(err => {
-        console.log('Error getting documents', err);
-      });
+    return this.afs.collection('/recipes').valueChanges();
   }
 
   /**
    * updateRecipe
    */
-  public updateRecipe(recipeId) {
-    console.log(recipeId + ' updated');
+  public updateRecipe(recipe) {
+    console.log(recipe + ' updated');
     // TODO fill in update function
+    this.recipeCollection.doc(recipe).set({recipe}).then(()=>{
+      console.log('Document successfully updated!');
+    }).catch((error) => {
+      console.error('Error updating document: ', error);
+    });
   }
 
   /**
