@@ -19,6 +19,13 @@ export class UploadrecipeComponent implements OnInit {
   categoryFormGroup: FormGroup;
   workingRecipe: Recipe;
 
+  categories = [
+    'Breakfast',
+    'Lunch',
+    'Dinner',
+    'Snack'
+  ];
+
 
   constructor(private formBuilder: FormBuilder, private recipeService: RecipesService, private auth: AuthService) { }
 
