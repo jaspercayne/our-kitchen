@@ -8,6 +8,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
 import { UploadrecipeComponent } from './pages/uploadrecipe/uploadrecipe.component';
 import { BrowseRecipesComponent } from './pages/browse-recipes/browse-recipes.component';
+import { RecipeDetailComponent } from './pages/recipe-detail/recipe-detail.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'verify-email-address', component: VerifyEmailComponent },
   { path: 'new-recipe', component: UploadrecipeComponent },
   { path: 'browse', component: BrowseRecipesComponent },
+  { path: 'details/:id', component: RecipeDetailComponent },
   {
     path: '',
     redirectTo: '/home',

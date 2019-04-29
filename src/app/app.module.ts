@@ -26,6 +26,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { BrowseRecipesComponent } from './pages/browse-recipes/browse-recipes.component';
+import { RecipeDetailComponent } from './pages/recipe-detail/recipe-detail.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { BrowseRecipesComponent } from './pages/browse-recipes/browse-recipes.co
     HeaderComponent,
     FooterComponent,
     SidenavListComponent,
-    BrowseRecipesComponent
+    BrowseRecipesComponent,
+    RecipeDetailComponent
   ],
   imports: [
     BrowserModule,
