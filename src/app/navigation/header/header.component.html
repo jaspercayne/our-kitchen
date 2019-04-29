@@ -12,7 +12,13 @@
 
       <li>
         <button mat-icon-button>
-          <a routerLink="/new-recipe">Upload recipe</a>
+          <a routerLink="/browse">All Recipes</a>
+        </button>
+      </li>
+
+      <li>
+        <button mat-icon-button>
+          <a routerLink="/new-recipe">Upload a Recipe</a>
         </button>
       </li>
 
@@ -28,7 +34,7 @@
         </mat-menu>
       </li> -->
 
-      <li>
+      <!-- <li>
         <button mat-icon-button>
           <a routerLink="#">Resources</a>
         </button>
@@ -44,7 +50,7 @@
         <button mat-icon-button>
           <a routerLink="/contact">Contact Us</a>
         </button>
-      </li>
+      </li> -->
 
       <li *ngIf="!authService.isLoggedIn">
         <button mat-icon-button>
