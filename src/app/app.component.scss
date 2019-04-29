@@ -1,3 +1,25 @@
+.container{
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 250%;
+}
+
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+    height: 80vh;
+}
+
+mat-sidenav {
+    width: 250px;
+}
+
+.logo{
+  max-width: 50px;
+  max-height: 50px;
+}
+
+
 ng-ais-clear-refinements {
     display: block;
     margin-top: 1rem;
