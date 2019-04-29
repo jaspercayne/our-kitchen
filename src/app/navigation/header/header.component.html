@@ -1,0 +1,64 @@
+<mat-toolbar color="primary">
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a routerLink="/home">Home</a>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="center" fxHide.xs>
+    <ul fxLayout fxLayoutGap="150px" class="navigation-items">
+
+      <li>
+        <button mat-icon-button>
+          <a routerLink="/new-recipe">Upload recipe</a>
+        </button>
+      </li>
+
+      <!-- <li class="solutionsMenu">
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+          Solutions
+        </button>
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item>For Profit Organizations</button>
+          <button mat-menu-item>Not for Profit Organizations</button>
+          <button mat-menu-item>For Unions & Associations</button>
+          <button mat-menu-item>For Brokers & Consultants</button>
+        </mat-menu>
+      </li> -->
+
+      <li>
+        <button mat-icon-button>
+          <a routerLink="#">Resources</a>
+        </button>
+      </li>
+
+      <li>
+        <button mat-icon-button>
+          <a routerLink="/partner-providers">Partner Providers</a>
+        </button>
+      </li>
+
+      <li>
+        <button mat-icon-button>
+          <a routerLink="/contact">Contact Us</a>
+        </button>
+      </li>
+
+      <li *ngIf="!authService.isLoggedIn">
+        <button mat-icon-button>
+          <a routerLink="/login">Login</a>
+        </button>
+      </li>
+
+      <li *ngIf="authService.isLoggedIn">
+        <button mat-icon-button>
+          <a class="nav-link" (click)="authService.SignOut()">
+            <i class="fas fa-sign-out-alt"></i>Log out</a>
+        </button>
+      </li>
+
+    </ul>
+  </div>
+</mat-toolbar>
