@@ -1,3 +1,5 @@
-<p>
-  browse-recipes works!
-</p>
+<div *ngFor="let recipe of recipes|async">
+  <app-recipecard [recipe]="recipe">
+  </app-recipecard>
+  <br>
+</div>
