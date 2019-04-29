@@ -1,15 +1,22 @@
-<mat-card>
-  <mat-card-title>
-    {{title}}
-  </mat-card-title>
-  <mat-card-subtitle>
-    Under Construction!
-  </mat-card-subtitle>
-  <mat-card-content>
-    This page is under construction. Check back later to see if we are ready yet.
-  </mat-card-content>
-</mat-card>
-
-<app-uploadrecipe></app-uploadrecipe>
-
-<router-outlet></router-outlet>
+<div class="container" fxLayout="column">
+    <!-- Header -->
+    <div fxLayout fxLayoutAlign="center center">
+        <h1>Welcome to Our Kitchen</h1>
+    </div>
+  
+    <!-- nav panel here -->
+    <mat-sidenav-container>
+      <mat-sidenav #sidenav role="navigation">
+        <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+        <app-searchbox></app-searchbox>
+        <!-- Page body -->
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+    <!-- Footer -->
+    <app-footer fxFlexOffset="auto"></app-footer>
+  </div>
+  
