@@ -104,7 +104,9 @@ export class AuthService {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
       roles: {
-        subscriber: true
+        subscriber: user.roles.subscriber,
+        editor: user.roles.editor,
+        admin: user.roles.admin
       }
     };
     return userRef.set(userData, {
