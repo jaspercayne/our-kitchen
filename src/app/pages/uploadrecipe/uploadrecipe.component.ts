@@ -77,6 +77,6 @@ export class UploadrecipeComponent implements OnInit {
   }
 
   submit() {
-    this.recipeService.createRecipe(this.workingRecipe);
+    this.recipeService.uploadRecipe(this.workingRecipe);
   }
 }
