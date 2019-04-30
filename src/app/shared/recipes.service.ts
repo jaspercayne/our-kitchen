@@ -16,10 +16,13 @@ export class RecipesService implements OnInit {
   recipeCollection: AngularFirestoreCollection<Recipe>;
   recipes: any;
 
+  recipeDoc: AngularFirestoreDocument<Recipe>;
+  recipe: Observable<Recipe>;
+
   constructor(private afs: AngularFirestore, private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.recipeCollection = this.afs.collection('recipes');
+    this.recipeCollection = this.afs.collection('/recipes');
     this.recipes = this.recipeCollection.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
@@ -43,21 +46,24 @@ export class RecipesService implements OnInit {
     });
   }
 
+  public uploadRecipe(workingRecipe: Recipe) {
+    let newid = this.afs.createId();
+    console.log(newid);
+    this.afs.collection('recipes').doc(newid).set({
+      recipeid: newid,
+      title: workingRecipe.title,
+      author: this.auth.afAuth.auth.currentUser.displayName,
+      category: workingRecipe.category,
+      ingredients: workingRecipe.ingredients,
+      directions: workingRecipe.directions
+    });
+  }
+
   /**
    * getRecipe
    */
   public getRecipe(recipeId) {
-    this.recipes.doc(recipeId).get()
-      .then(doc => {
-        if (!doc.exists) {
-          console.log('No such document!');
-        } else {
-          console.log('Document data:', doc.data());
-        }
-      })
-      .catch(err => {
-        console.log('Error getting document', err);
-      });
+    return this.afs.doc('/recipes/' + recipeId).valueChanges();
   }
 
   /**
@@ -73,7 +79,7 @@ export class RecipesService implements OnInit {
   public updateRecipe(recipe) {
     console.log(recipe + ' updated');
     // TODO fill in update function
-    this.recipeCollection.doc(recipe).set({recipe}).then(()=>{
+    this.recipeCollection.doc(recipe).set({ recipe }).then(() => {
       console.log('Document successfully updated!');
     }).catch((error) => {
       console.error('Error updating document: ', error);
