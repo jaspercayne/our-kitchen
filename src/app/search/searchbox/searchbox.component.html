@@ -7,7 +7,9 @@
   <div *ngFor="let recipe of results">
     <mat-list>
       <mat-list-item>
-        {{recipe.title}} -&nbsp; <em> {{recipe.category}}</em>
+        <a routerLink="/details/{{recipe.recipeid}}">
+          {{recipe.title}} -&nbsp; <em> {{recipe.category}}</em>
+        </a>
       </mat-list-item>
     </mat-list>
   </div>

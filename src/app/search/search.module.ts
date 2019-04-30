@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { SearchboxComponent } from './searchbox/searchbox.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [SearchboxComponent],
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   exports: [
     SearchboxComponent

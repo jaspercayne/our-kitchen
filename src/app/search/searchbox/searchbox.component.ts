@@ -21,7 +21,7 @@ export class SearchboxComponent implements OnInit {
 
   date: Observable<any[]>;
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) { }
 
   ngOnInit() {
     combineLatest(this.startObs, this.endObs).subscribe((value) => {
@@ -38,7 +38,11 @@ export class SearchboxComponent implements OnInit {
   }
 
   searchByTitle(start, end) {
-    return this.db.collection('/recipes', ref => ref.limit(4).orderBy('title').startAt(start)).valueChanges();
+    return this.afs.collection('/recipes', ref => ref.limit(4).orderBy('title').startAt(start)).valueChanges();
+  }
+
+  searchByCategory(start, end) {
+    return this.afs.collection('/recipes', ref => ref.limit(4).orderBy('category').startAt(start)).valueChanges();
   }
 
 }
