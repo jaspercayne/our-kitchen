@@ -4,11 +4,11 @@
     <mat-icon>home</mat-icon> <span class="nav-caption">Home</span>
   </a>
 
-  <a mat-list-item routerLink="/about" (click)="onSidenavClose()">
-    <mat-icon>help_outline</mat-icon> <span class="nav-caption">About Us</span>
+  <a mat-list-item routerLink="/browse" (click)="onSidenavClose()">
+    <mat-icon>view_list</mat-icon> <span class="nav-caption">All Recipes</span>
   </a>
 
-  <a mat-list-item>
+  <!-- <a mat-list-item>
     <div mat-list-item class="solutionsMenu">
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
         <mat-icon>new_releases</mat-icon><span class="nav-caption solutionsTarget">Solutions</span>
@@ -20,22 +20,35 @@
         <button mat-menu-item (click)="onSidenavClose()">For Brokers & Consultants</button>
       </mat-menu>
     </div>
+  </a> -->
+
+  <a mat-list-item routerLink="/new-recipe" (click)="onSidenavClose()">
+     <mat-icon>web</mat-icon><span class="nav-caption">Upload a Recipe</span>
   </a>
 
-  <a mat-list-item routerLink="/resources" (click)="onSidenavClose()">
-     <mat-icon>web</mat-icon><span class="nav-caption">Resources</span>
-  </a>
-
-  <a mat-list-item routerLink="/partner-providers" (click)="onSidenavClose()">
+  <!-- <a mat-list-item routerLink="/partner-providers" (click)="onSidenavClose()">
     <mat-icon>work_outline</mat-icon> <span class="nav-caption">Partner Providers</span>
   </a>
 
   <a mat-list-item routerLink="/contact" (click)="onSidenavClose()">
     <mat-icon>mail_outline</mat-icon> <span class="nav-caption">Contact Us</span>
-  </a>
+  </a> -->
 
-  <a mat-list-item routerLink="#" (click)="onSidenavClose()">
+  <!-- <a mat-list-item routerLink="/#" (click)="onSidenavClose()">
     <mat-icon>keyboard_return</mat-icon><span class="nav-caption">Return</span>
-  </a>
+  </a> -->
+
+  <div *ngIf="!authService.isLoggedIn">
+    <!-- <button mat-icon-button> -->
+      <a mat-list-item routerLink="/login" (click)="onSidenavClose()">Login</a>
+    <!-- </button> -->
+    </div>
+
+  <div *ngIf="authService.isLoggedIn">
+    <!-- <button mat-icon-button> -->
+      <a mat-list-item class="nav-link" (click)="authService.SignOut()" (click)="onSidenavClose()">
+        <i class="fas fa-sign-out-alt"></i>Log out</a>
+    <!-- </button> -->
+      </div>
 
 </mat-nav-list>
