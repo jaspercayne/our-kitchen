@@ -27,7 +27,7 @@ export class UploadrecipeComponent implements OnInit {
   ];
 
 
-  constructor(private formBuilder: FormBuilder, private recipeService: RecipesService, private auth: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private recipeService: RecipesService, public auth: AuthService) { }
 
   ngOnInit() {
     this.titleFormGroup = this.formBuilder.group({
