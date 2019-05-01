@@ -143,12 +143,12 @@ $mat-dark-theme-background: (
 // Theme Config
 
 $mat-primary: (
-  main: #36af9f,
-  lighter: #c3e7e2,
-  darker: #229683,
-  200: #36af9f, // For slide toggle,
+  main: #a500ff,
+  lighter: #e4b3ff,
+  darker: #8a00ff,
+  200: #a500ff, // For slide toggle,
   contrast : (
-    main: $dark-primary-text,
+    main: $light-primary-text,
     lighter: $dark-primary-text,
     darker: $light-primary-text,
   )
@@ -156,12 +156,12 @@ $mat-primary: (
 $theme-primary: mat-palette($mat-primary, main, lighter, darker);
 
 $mat-accent: (
-  main: #42c24d,
-  lighter: #c6edca,
-  darker: #2bac34,
-  200: #42c24d, // For slide toggle,
+  main: #446eff,
+  lighter: #c7d4ff,
+  darker: #2d51ff,
+  200: #446eff, // For slide toggle,
   contrast : (
-    main: $dark-primary-text,
+    main: $light-primary-text,
     lighter: $dark-primary-text,
     darker: $light-primary-text,
   )
