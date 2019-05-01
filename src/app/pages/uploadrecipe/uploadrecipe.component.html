@@ -37,11 +37,11 @@
       <mat-form-field>
         <input matInput placeholder="Ingredients" formControlName="ingCtrl" required>
       </mat-form-field>
-      <button mat-button (click)=addIngredient(ingredientsFormGroup.controls.ingCtrl.value)>Add ingredient</button>
+      <button mat-icon-button color="primary" (click)=addIngredient(ingredientsFormGroup.controls.ingCtrl.value)><mat-icon>add_circle</mat-icon></button>
       <div *ngFor="let ing of workingRecipe.ingredients">
         <span *ngIf="ing">
           {{ing}}
-          <button (click)="deleteIngredient(ing)"><i class="material-icons"> delete_forever </i></button>
+          <button mat-icon-button color="warn" (click)="deleteIngredient(ing)"><i class="material-icons"> delete_forever </i></button>
         </span>
       </div>
       <div>
@@ -58,11 +58,11 @@
       <mat-form-field>
         <input matInput placeholder="Directions" formControlName="stepCtrl" required>
       </mat-form-field>
-      <button mat-button (click)=addStep(directionsFormGroup.controls.stepCtrl.value)>Add step</button>
+      <button mat-icon-button color="primary" (click)=addStep(directionsFormGroup.controls.stepCtrl.value)><mat-icon>add_circle</mat-icon></button>
       <div *ngFor="let step of workingRecipe.directions">
         <span *ngIf="step">
           {{step}}
-          <button (click)="deleteStep(step)"><i class="material-icons"> delete_forever </i></button>
+          <button mat-icon-button color="warn" (click)="deleteStep(step)"><i class="material-icons"> delete_forever </i></button>
         </span>
       </div>
       <div>
@@ -78,7 +78,7 @@
     <app-recipecard [recipe]="workingRecipe"></app-recipecard>
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="stepper.reset()" (click)="resetForm()">Reset</button>
       <button mat-button (click)="submit()" (click)="stepper.reset()">Submit</button>
     </div>
   </mat-step>
