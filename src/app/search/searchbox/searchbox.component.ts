@@ -34,7 +34,7 @@ export class SearchboxComponent implements OnInit {
   search($event) {
     let q = $event.target.value;
     this.startAt.next(q !== '' ? q : '');
-    this.endAt.next(q !== '' ? + '/utf8ff' : '');
+    this.endAt.next(q !== '' ? + q+'\\uf8ff' : '');
   }
 
   searchByTitle(start, end) {
