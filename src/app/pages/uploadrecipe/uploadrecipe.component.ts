@@ -69,14 +69,19 @@ export class UploadrecipeComponent implements OnInit {
   }
 
   deleteIngredient(ingredient: string) {
-    this.workingRecipe.ingredients[this.workingRecipe.ingredients.indexOf(ingredient)] = null;
+    this.workingRecipe.ingredients.splice(this.workingRecipe.ingredients.indexOf(ingredient), 1);
   }
 
   deleteStep(step: string) {
-    this.workingRecipe.directions[this.workingRecipe.directions.indexOf(step)] = null;
+    this.workingRecipe.directions.splice(this.workingRecipe.directions.indexOf(step), 1);
   }
 
   submit() {
     this.recipeService.uploadRecipe(this.workingRecipe);
+  }
+
+  resetForm() {
+    this.workingRecipe.ingredients = new Array();
+    this.workingRecipe.directions = new Array();
   }
 }
