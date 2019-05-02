@@ -13,7 +13,7 @@
             <ol class="ais-Hits-list">
               <li *ngFor="let hit of hits" class="ais-Hits-item">
                 <a routerLink="/details/{{hit.recipeid}}">
-                  {{hit.title}}
+                  {{hit.title}}&nbsp;-&nbsp;{{hit.category}}
                 </a>
                 <ais-highlight attribute="title" [hit]="hit"> </ais-highlight>
               </li>
