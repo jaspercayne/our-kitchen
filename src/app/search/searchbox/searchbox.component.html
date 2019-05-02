@@ -1,8 +1,8 @@
-<mat-toolbar>
+<!-- <mat-toolbar>
   <span>
-    <mat-form-field floatLabel="never" >
+    <mat-form-field floatLabel="never">
       <span><input matInput type="text" [(ngModel)]="searchTerm" (keydown)="search($event)" id="search"
-         placeholder="Search by name" [matAutocomplete]="auto"></span>
+          placeholder="Search by name" [matAutocomplete]="auto"></span>
     </mat-form-field>
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let recipe of results" [value]="option">
@@ -12,16 +12,31 @@
       </mat-option>
     </mat-autocomplete>
   </span>
-</mat-toolbar>
-
-<!-- <div *ngIf="results">
-  <div *ngFor="let recipe of results">
-    <mat-list>
-      <mat-list-item>
-        <a routerLink="/details/{{recipe.recipeid}}">
-          {{recipe.title}} -&nbsp; <em> {{recipe.category}}</em>
-        </a>
-      </mat-list-item>
-    </mat-list>
-  </div>
-</div> -->
+</mat-toolbar> -->
+<br>
+<!-- <mat-toolbar> -->
+<div>
+  <img src="../../../assets/search-by-algolia-light-background.png" alt="algolia logo">
+  <ais-instantsearch
+    [config]="{ appId: 'G9ENFRMAIZ', apiKey: 'eb09cf6c2758f31ed399e1febc393f60', indexName: 'recipes' }">
+    <ais-panel>
+      <ais-search-box placeholder="Search" [searchAsYouType]="true" [autofocus]="false"></ais-search-box>
+      <ais-hits>
+        <ng-template let-hits="hits" let-results="results">
+          <p class="info" *ngIf="hits.length === 0">
+            No results were found for {{results.query}}.
+          </p>
+          <ol class="ais-Hits-list">
+            <li *ngFor="let hit of hits" class="ais-Hits-item">
+              <a routerLink="/details/{{hit.recipeid}}">
+                {{hit.title}}
+              </a>
+              <ais-highlight attribute="title" [hit]="hit"> </ais-highlight>
+            </li>
+          </ol>
+        </ng-template>
+      </ais-hits>
+    </ais-panel>
+  </ais-instantsearch>
+</div>
+<!-- </mat-toolbar> -->

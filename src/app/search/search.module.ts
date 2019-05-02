@@ -4,6 +4,7 @@ import { SearchboxComponent } from './searchbox/searchbox.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
+import { NgAisModule } from 'angular-instantsearch';
 
 @NgModule({
   declarations: [SearchboxComponent],
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FormsModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    NgAisModule
   ],
   exports: [
     SearchboxComponent
