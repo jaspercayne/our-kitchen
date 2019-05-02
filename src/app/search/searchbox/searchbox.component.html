@@ -1,22 +1,5 @@
-<!-- <mat-toolbar>
-  <span>
-    <mat-form-field floatLabel="never">
-      <span><input matInput type="text" [(ngModel)]="searchTerm" (keydown)="search($event)" id="search"
-          placeholder="Search by name" [matAutocomplete]="auto"></span>
-    </mat-form-field>
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let recipe of results" [value]="option">
-        <a routerLink="/details/{{recipe.recipeid}}">
-          {{recipe.title}}
-        </a>
-      </mat-option>
-    </mat-autocomplete>
-  </span>
-</mat-toolbar> -->
 <br>
-<!-- <mat-toolbar> -->
 <div>
-  <img src="../../../assets/search-by-algolia-light-background.png" alt="algolia logo">
   <ais-instantsearch
     [config]="{ appId: 'G9ENFRMAIZ', apiKey: 'eb09cf6c2758f31ed399e1febc393f60', indexName: 'recipes' }">
     <ais-panel>
@@ -25,18 +8,21 @@
         <ng-template let-hits="hits" let-results="results">
           <p class="info" *ngIf="hits.length === 0">
             No results were found for {{results.query}}.
+            <ais-clear-refinements [clearsQuery]="true"></ais-clear-refinements>
           </p>
-          <ol class="ais-Hits-list">
-            <li *ngFor="let hit of hits" class="ais-Hits-item">
-              <a routerLink="/details/{{hit.recipeid}}">
-                {{hit.title}}
-              </a>
-              <ais-highlight attribute="title" [hit]="hit"> </ais-highlight>
-            </li>
-          </ol>
+          <div *ngIf="results.query && results.query.length > 0">
+            <ol class="ais-Hits-list">
+              <li *ngFor="let hit of hits" class="ais-Hits-item">
+                <a routerLink="/details/{{hit.recipeid}}">
+                  {{hit.title}}
+                </a>
+                <ais-highlight attribute="title" [hit]="hit"> </ais-highlight>
+              </li>
+            </ol>
+            <img src="../../../assets/search-by-algolia-light-background.png" alt="algolia logo">
+          </div>
         </ng-template>
       </ais-hits>
     </ais-panel>
   </ais-instantsearch>
 </div>
-<!-- </mat-toolbar> -->

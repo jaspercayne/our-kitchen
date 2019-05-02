@@ -15,40 +15,9 @@ export class SearchboxComponent  {
     refine: Function;
   };
 
-  searchTerm: string;
-
-  startAt = new Subject();
-  endAt = new Subject();
-
-  startObs = this.startAt.asObservable();
-  endObs = this.endAt.asObservable();
-
   results;
 
   date: Observable<any[]>;
 
   constructor(private afs: AngularFirestore) { }
-
-  ngOnInit() {
-    combineLatest(this.startObs, this.endObs).subscribe((value) => {
-      this.searchByTitle(value[0], value[1]).subscribe((results) => {
-        this.results = results;
-      });
-    });
-  }
-
-  search($event) {
-    let q = $event.target.value;
-    this.startAt.next(q !== '' ? q : '');
-    this.endAt.next(q !== '' ? + q+'\\uf8ff' : '');
-  }
-
-  searchByTitle(start, end) {
-    return this.afs.collection('/recipes', ref => ref.limit(4).orderBy('title').startAt(start)).valueChanges();
-  }
-
-  searchByCategory(start, end) {
-    return this.afs.collection('/recipes', ref => ref.limit(4).orderBy('category').startAt(start)).valueChanges();
-  }
-
 }
