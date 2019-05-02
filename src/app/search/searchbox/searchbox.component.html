@@ -8,7 +8,6 @@
         <ng-template let-hits="hits" let-results="results">
           <p class="info" *ngIf="hits.length === 0">
             No results were found for {{results.query}}.
-            <ais-clear-refinements [clearsQuery]="true"></ais-clear-refinements>
           </p>
           <div *ngIf="results.query && results.query.length > 0">
             <ol class="ais-Hits-list">
