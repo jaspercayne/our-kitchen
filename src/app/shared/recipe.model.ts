@@ -5,4 +5,5 @@ export class Recipe {
     category: string;
     ingredients: string[];
     directions: string[];
+    rating: number;
 }
