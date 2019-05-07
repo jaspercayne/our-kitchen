@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Recipe } from 'src/app/shared/recipe.model';
 import { RecipesService } from 'src/app/shared/recipes.service';
 
@@ -7,7 +7,7 @@ import { RecipesService } from 'src/app/shared/recipes.service';
   templateUrl: './recipecard.component.html',
   styleUrls: ['./recipecard.component.scss']
 })
-export class RecipecardComponent implements OnInit {
+export class RecipecardComponent implements OnInit, AfterViewInit {
   @Input() recipe: Recipe;
 
   constructor(private recipeService: RecipesService) { }
@@ -28,7 +28,7 @@ export class RecipecardComponent implements OnInit {
     const values: number[] = this.recipeService.getRecipeRating(this.recipe.recipeid);
     const len = values.length;
     const total = values.reduce((sum, current) => sum + current, 0);
-    this.recipe.rating = total/len;
+    this.recipe.rating = total / len;
     console.log('TOTAL RATING: ' + this.recipe.rating);
   }
 }

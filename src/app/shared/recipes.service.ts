@@ -8,25 +8,20 @@ import { AuthService } from '../auth/auth.service';
 interface RecipeObject extends Recipe {
   id: string;
 }
-interface RecipeRatings {
-  one: number;
-  two: number;
-  three: number;
-  four: number;
-  five: number;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipesService implements OnInit {
+
+  constructor(private afs: AngularFirestore, private auth: AuthService) { }
   recipeCollection: AngularFirestoreCollection<Recipe>;
   recipes: any;
 
   recipeDoc: AngularFirestoreDocument<Recipe>;
   recipe: Observable<Recipe>;
 
-  constructor(private afs: AngularFirestore, private auth: AuthService) { }
+  val: number[] = [];
 
   ngOnInit(): void {
     this.recipeCollection = this.afs.collection('/recipes');
@@ -54,7 +49,7 @@ export class RecipesService implements OnInit {
   }
 
   public uploadRecipe(workingRecipe: Recipe) {
-    let newid = this.afs.createId();
+    const newid = this.afs.createId();
     console.log(newid);
     this.afs.collection('recipes').doc(newid).set({
       recipeid: newid,
@@ -73,17 +68,15 @@ export class RecipesService implements OnInit {
     return this.afs.doc('/recipes/' + recipeId).valueChanges();
   }
 
-  val: number[] = [];
-
   public getRecipeRating(recipeId): number[] {
     this.afs.doc('/ratings/' + recipeId)
       .valueChanges()
       .subscribe(res => {
-        this.val[0] = res['one'];
-        this.val[1] = res['two'] * 2;
-        this.val[2] = res['three'] * 3;
-        this.val[3] = res['four'] * 4;
-        this.val[4] = res['five'] * 5;
+        this.val[0] = res['one'.toString()];
+        this.val[1] = res['two'.toString()] * 2;
+        this.val[2] = res['three'.toString()] * 3;
+        this.val[3] = res['four'.toString()] * 4;
+        this.val[4] = res['five'.toString()] * 5;
       });
     return this.val;
   }
