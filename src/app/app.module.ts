@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { StarRatingModule } from 'angular-star-rating';
 
 import { HomeComponent } from './pages/home/home.component';
 import { RecipecardComponent } from './pages/recipecard/recipecard.component';
@@ -53,7 +54,8 @@ import { RecipeDetailComponent } from './pages/recipe-detail/recipe-detail.compo
     AngularFireAuthModule,
     AuthModule,
     ErrorPagesModule,
-    SearchModule
+    SearchModule,
+    StarRatingModule.forRoot()
   ],
   providers: [RecipesService, AuthService],
   bootstrap: [AppComponent]

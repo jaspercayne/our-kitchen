@@ -1,10 +1,11 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      {{recipe.title}}
+      {{recipe.title}} - {{recipe.category}}
     </mat-card-title>
     <mat-card-subtitle>
-      {{recipe.category}}
+      <!-- rating -->
+      <star-rating [starType]="'icon'" [rating]="recipe.rating"></star-rating>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>

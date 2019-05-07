@@ -1,5 +1,4 @@
 <div *ngFor="let recipe of recipes|async">
-  <app-recipecard [recipe]="recipe">
-  </app-recipecard>
+  <a routerLink="/details/{{recipe.recipeid}}">{{recipe.title}}</a>
   <br>
 </div>

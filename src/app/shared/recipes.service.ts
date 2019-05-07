@@ -8,6 +8,13 @@ import { AuthService } from '../auth/auth.service';
 interface RecipeObject extends Recipe {
   id: string;
 }
+interface RecipeRatings {
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+  five: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +71,21 @@ export class RecipesService implements OnInit {
    */
   public getRecipe(recipeId) {
     return this.afs.doc('/recipes/' + recipeId).valueChanges();
+  }
+
+  val: number[] = [];
+
+  public getRecipeRating(recipeId): number[] {
+    this.afs.doc('/ratings/' + recipeId)
+      .valueChanges()
+      .subscribe(res => {
+        this.val[0] = res['one'];
+        this.val[1] = res['two'] * 2;
+        this.val[2] = res['three'] * 3;
+        this.val[3] = res['four'] * 4;
+        this.val[4] = res['five'] * 5;
+      });
+    return this.val;
   }
 
   /**
