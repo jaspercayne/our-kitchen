@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Recipe } from 'src/app/shared/recipe.model';
 import { RecipesService } from 'src/app/shared/recipes.service';
+import { delay } from 'q';
+import { RatingChangeEvent } from 'angular-star-rating';
 
 @Component({
   selector: 'app-recipecard',
@@ -9,18 +11,13 @@ import { RecipesService } from 'src/app/shared/recipes.service';
 })
 export class RecipecardComponent implements OnInit, AfterViewInit {
   @Input() recipe: Recipe;
-
+  onRatingChangeResult: RatingChangeEvent;
   constructor(private recipeService: RecipesService) { }
 
-  ngOnInit() {
-    // this.recipe.title = 'Peanut Butter and Jelly Sandwich';
-    // this.recipe.author = 'Admin';
-    // this.recipe.category = 'Lunch';
-    // this.recipe.ingredients = ['bread', 'peanut butter', 'jelly'];
-    // this.recipe.directions = ['spread peanut butter on one slice', 'spread jelly on the other', 'stick them together'];
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
+    delay(0);
     this.calculateRating();
   }
 
@@ -30,5 +27,10 @@ export class RecipecardComponent implements OnInit, AfterViewInit {
     const total = values.reduce((sum, current) => sum + current, 0);
     this.recipe.rating = total / len;
     console.log('TOTAL RATING: ' + this.recipe.rating);
+  }
+
+  onRatingChange = ($event: RatingChangeEvent) => {
+    this.onRatingChangeResult = $event;
+    this.recipeService.updateRecipeRating(this.recipe, $event.rating);
   }
 }
