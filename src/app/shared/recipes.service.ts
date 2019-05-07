@@ -59,6 +59,14 @@ export class RecipesService implements OnInit {
       ingredients: workingRecipe.ingredients,
       directions: workingRecipe.directions
     });
+    // TODO add ratings doc here
+    this.afs.collection('ratings/').doc(newid).set({
+      one: 0,
+      two: 0,
+      three: 0,
+      four: 0,
+      five: 0
+    });
   }
 
   /**
@@ -73,12 +81,42 @@ export class RecipesService implements OnInit {
       .valueChanges()
       .subscribe(res => {
         this.val[0] = res['one'.toString()];
-        this.val[1] = res['two'.toString()] * 2;
-        this.val[2] = res['three'.toString()] * 3;
-        this.val[3] = res['four'.toString()] * 4;
-        this.val[4] = res['five'.toString()] * 5;
+        this.val[1] = res['two'.toString()];
+        this.val[2] = res['three'.toString()];
+        this.val[3] = res['four'.toString()];
+        this.val[4] = res['five'.toString()];
       });
     return this.val;
+  }
+
+  public updateRecipeRating(recipe, newRating) {
+    let myRatings: number[] = [0, 0, 0, 0, 0];
+    myRatings = this.getRecipeRating(recipe.recipeid);
+    switch (newRating) {
+      case 1:
+        const one = myRatings[0] + 1;
+        this.afs.doc('/ratings/' + recipe.recipeid).update({ one });
+        break;
+      case 2:
+        const two = myRatings[1] + 1;
+        this.afs.doc('/ratings/' + recipe.recipeid).update({ two });
+        break;
+      case 3:
+        const three = myRatings[2] + 1;
+        this.afs.doc('/ratings/' + recipe.recipeid).update({ three });
+        break;
+      case 4:
+        const four = myRatings[3] + 1;
+        this.afs.doc('/ratings/' + recipe.recipeid).update({ four });
+        break;
+      case 5:
+        const five = myRatings[4] + 1;
+        this.afs.doc('/ratings/' + recipe.recipeid).update({ five });
+        break;
+      default:
+        break;
+    }
+
   }
 
   /**
@@ -93,8 +131,7 @@ export class RecipesService implements OnInit {
    */
   public updateRecipe(recipe) {
     console.log(recipe + ' updated');
-    // TODO fill in update function
-    this.recipeCollection.doc(recipe).set({ recipe }).then(() => {
+    this.recipeCollection.doc(recipe.recipeid).set({ recipe }).then(() => {
       console.log('Document successfully updated!');
     }).catch((error) => {
       console.error('Error updating document: ', error);
