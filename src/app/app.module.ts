@@ -8,7 +8,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Firebase } from 'src/firebase';
 
-import { RecipesService } from './shared/recipes.service';
+import { RecipeService } from './shared/recipes.service';
 import { AuthService } from './auth/auth.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -57,7 +57,7 @@ import { RecipeDetailComponent } from './pages/recipe-detail/recipe-detail.compo
     SearchModule,
     StarRatingModule.forRoot()
   ],
-  providers: [RecipesService, AuthService],
+  providers: [RecipeService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

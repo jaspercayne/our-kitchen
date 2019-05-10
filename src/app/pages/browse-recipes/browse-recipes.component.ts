@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from 'src/app/shared/recipes.service';
+import { RecipeService } from 'src/app/shared/recipes.service';
 import { Observable } from 'rxjs';
 import { Recipe } from 'src/app/shared/recipe.model';
 
@@ -11,7 +11,7 @@ import { Recipe } from 'src/app/shared/recipe.model';
 export class BrowseRecipesComponent implements OnInit {
   recipes;
 
-  constructor(private recipeService: RecipesService) { }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
     this.recipes = this.recipeService.getRecipes();

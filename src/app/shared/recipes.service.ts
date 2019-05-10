@@ -12,7 +12,7 @@ interface RecipeObject extends Recipe {
 @Injectable({
   providedIn: 'root'
 })
-export class RecipesService implements OnInit {
+export class RecipeService implements OnInit {
 
   constructor(private afs: AngularFirestore, private auth: AuthService) { }
   recipeCollection: AngularFirestoreCollection<Recipe>;
