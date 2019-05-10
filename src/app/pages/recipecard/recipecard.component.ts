@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, AfterContentInit, OnChanges } from '@angular/core';
 import { Recipe } from 'src/app/shared/recipe.model';
-import { RecipesService } from 'src/app/shared/recipes.service';
+import { RecipeService } from 'src/app/shared/recipes.service';
 import { delay } from 'q';
 import { RatingChangeEvent } from 'angular-star-rating';
 
@@ -9,28 +9,32 @@ import { RatingChangeEvent } from 'angular-star-rating';
   templateUrl: './recipecard.component.html',
   styleUrls: ['./recipecard.component.scss']
 })
-export class RecipecardComponent implements OnInit, AfterViewInit {
+export class RecipecardComponent implements OnInit, OnChanges {
   @Input() recipe: Recipe;
   onRatingChangeResult: RatingChangeEvent;
-  constructor(private recipeService: RecipesService) { }
+  constructor(private recipeService: RecipeService) { }
 
-  ngOnInit() { }
-
-  ngAfterViewInit() {
+  ngOnInit() {
     delay(0);
-    this.calculateRating();
+  }
+
+  ngOnChanges() {
+    if (this.recipe != null) {
+      this.calculateRating();
+    }
   }
 
   calculateRating() {
     const values: number[] = this.recipeService.getRecipeRating(this.recipe.recipeid);
     const len = values.length;
-    const total = values.reduce((sum, current) => sum + current, 0);
+    const total = values[0] + (values[1] * 2) + (values[2] * 3) + (values[3] * 4) + (values[4] * 5);
     this.recipe.rating = total / len;
-    console.log('TOTAL RATING: ' + this.recipe.rating);
   }
 
   onRatingChange = ($event: RatingChangeEvent) => {
-    this.onRatingChangeResult = $event;
-    this.recipeService.updateRecipeRating(this.recipe, $event.rating);
+    if (this.recipe !== null) {
+      this.onRatingChangeResult = $event;
+      this.recipeService.updateRecipeRating(this.recipe, $event.rating);
+    }
   }
 }
