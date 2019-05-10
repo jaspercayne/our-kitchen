@@ -1,23 +1,26 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      {{recipe.title}} - {{recipe.category}}
+      {{recipe?.title}} - {{recipe?.category}}
     </mat-card-title>
     <mat-card-subtitle>
       <!-- rating -->
-      <star-rating [showHalfStars]="true" [rating]="recipe.rating" (ratingChange)="onRatingChange($event)"></star-rating>
+      <div *ngIf="recipe">
+        <star-rating [showHalfStars]="true" [rating]="recipe?.rating" >
+        </star-rating>
+      </div>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <ul>
-      <div *ngFor="let ingredient of recipe.ingredients">
+      <div *ngFor="let ingredient of recipe?.ingredients">
         <li>{{ingredient}}</li>
       </div>
     </ul>
     <br>
 
     <ol>
-      <div *ngFor="let step of recipe.directions">
+      <div *ngFor="let step of recipe?.directions">
         <li> {{step}} </li>
       </div>
     </ol>
@@ -28,6 +31,6 @@
     <button mat-button>SHARE</button>
   </mat-card-actions>
   <mat-card-footer>
-    This recipe was posted on Our Kitchen by {{recipe.author}}
+    This recipe was posted on Our Kitchen by {{recipe?.author}}
   </mat-card-footer>
 </mat-card>

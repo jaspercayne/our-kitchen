@@ -1,4 +1,4 @@
 <div *ngFor="let recipe of recipes|async">
-  <a routerLink="/details/{{recipe.recipeid}}">{{recipe.title}}</a>
+  <a routerLink="/details/{{recipe?.recipeid}}">{{recipe?.title}}</a>
   <br>
 </div>
